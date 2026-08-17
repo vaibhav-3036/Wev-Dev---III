@@ -1,0 +1,5 @@
+Hello this is updated content for the writefile method again
+Hello this is updated content for the appendfile method again
+Hello this is updated content for the appendfile method again
+Hello this is updated content for the appendfile method in inew line
+Hello this is updated content for the appendfile method in inew line
