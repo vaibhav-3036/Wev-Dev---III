@@ -9,7 +9,7 @@ app.get(':id', (req, res) => {
 
 app.get('/', (req, res) => {
   console.log(req.params.id);
-}
+});
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
