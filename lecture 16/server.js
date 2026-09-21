@@ -1,13 +1,19 @@
 const express=require("express");
 const app=express();
+const morgan=require("morgan");
+
 const PORT=3000
 
 
-const logmiddleware=(req,res,next)=>{
-    req.name="john";
-    console.log("Request url:",req.url,"req.method:",req.method);
-    next();
-}
+// const logmiddleware=(req,res,next)=>{
+//     req.name="john";
+//     console.log("Request url:",req.url,"req.method:",req.method, "Time:",new Date().toLocaleString());
+//     next();
+// }
+
+
+
+app.use(morgan());
 
 const apicheckMidleware=(req,res,next)=>{
     if(req.query.API_KEY==="1234"){
@@ -18,7 +24,7 @@ const apicheckMidleware=(req,res,next)=>{
     }
 }
 
-app.use(logmiddleware);
+// app.use(logmiddleware);
 app.use(apicheckMidleware);
 
 app.get("/",(req,res)=>{
@@ -29,7 +35,12 @@ app.get("/",(req,res)=>{
 
 app.get("/data",(req,res)=>{
     console.log("Hello World");
-    res.send("Hello World");
+    res.json({
+        city: "sohna",
+        country: "India",
+        humdity: "50%",
+        temperature: "30C"
+    })
 })
 
 app.listen(PORT,()=>{
