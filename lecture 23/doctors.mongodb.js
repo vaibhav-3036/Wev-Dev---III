@@ -58,3 +58,37 @@ db.doctors.insertMany([
         department: "ENT",
     }
 ])
+
+db.doctors.aggregate([
+    {
+        $match: {
+          department:"Cardiology"
+        }
+    },
+    {
+        $project: {
+            name: 1,
+            specialty: 1,
+            fees: 1,
+            _id: 0
+        }   
+    },
+    {
+        $group: {
+            _id: "$yearsOfExperience",
+            totalDoctors: { $sum: 1 },
+            averageFees: { $avg: "$fees" }
+
+        }
+    },
+    {
+        $sort: { averageFees: -1 }
+    },
+    // {
+    //     $limit: 1
+    // },
+    {
+        $count: 'totalDoctors'
+    }
+
+])
